@@ -1,0 +1,12 @@
+# Obsidian vault git 同步排除规则
+# 窗口布局：每台机器不同，同步会互相覆盖
+.obsidian/workspace*.json
+
+# 缓存
+.obsidian/cache
+
+# Obsidian 回收站
+.Trash/
+
+# macOS 系统文件
+.DS_Store
