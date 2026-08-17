@@ -1,3 +1,5 @@
 {
-  "folder": "JesseYoung"
+  "folder": "",
+  "format": "YYYY-MM-DD",
+  "template": "templates/日报模板"
 }
