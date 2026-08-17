@@ -1,5 +1,5 @@
 {
-  "folder": "",
+  "folder": "smardaten",
   "format": "YYYY-MM-DD",
-  "template": "templates/日报模板"
+  "template": "templates/日报模板.md"
 }
