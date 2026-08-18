@@ -1,0 +1,4 @@
+*.lock
+*.db-wal
+*.db-shm
+memory_store.db
