@@ -2,7 +2,7 @@ weixin限流ret=-2=服务端限流；gateway重启必须用venv/bin/python。
 §
 用户 OA 登录密码：1qw2!QW@
 §
-英语计划~/.hermes/english-plan.md（三阶段）；2026-08-06删全部定时任务。
+英语计划~/.hermes/english-plan.md（三阶段）。
 §
 OA自发起流程（license申请等）：首页工作台→流程→我发起的查看，勿去事件流工作台。
 §
@@ -10,7 +10,7 @@ OA报销：table行只取处理中；出纳付款/经办会计=未付(待报销)
 §
 PPT内容：文字模式优先，默认给markdown素材不生成.pptx，除非明确说'生成ppt文件'。
 §
-Holographic同步：~/.hermes/memories/{MEMORY,USER}.md+memory_store.db+SOUL.md+english-plan.md（zip打包），provider=holographic。
+Holographic同步zip打包，provider=holographic；~/.hermes/memories软链→~/Documents/work/jiayang/hermes-memory/（git仓库jiayang，记忆改动后commit+push）。
 §
 H2目标7200万(月均1200万)，工厂需支撑5200万。HC规划（超总已批，2027-03前补完）：缺口101=PM14/AE53/DE(含数据开发)21/IE13。DE/IE重仓无锡、PM按地域、储备南京+无锡。PM人效10.2万→提效3倍30.6万/月；配比1:1.81:0.92:0.22。
 §
