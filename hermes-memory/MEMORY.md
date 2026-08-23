@@ -6,19 +6,23 @@ weixin限流ret=-2=服务端限流；gateway重启必须用venv/bin/python。
 §
 OA自发起流程（license申请等）：首页工作台→流程→我发起的查看，勿去事件流工作台。
 §
-OA报销：table行只取处理中；出纳付款/经办会计=未付(待报销)，支付确认=已付(过滤)；验证码pytesseract+ddddocr投票；CSV浏览器JS导出。
+OA报销：table行只取处理中；出纳付款/经办会计=未付(待报销)，支付确认=已付(过滤)；验证码pytesseract+ddddocr投票；CSV浏览器JS导出；完整流程见 skill smardaten-oa；查完必须把待报销金额写结果文件+记忆摘要（教训：只记流程不记结果）。
 §
 PPT内容：文字模式优先，默认给markdown素材不生成.pptx，除非明确说'生成ppt文件'。
 §
 Holographic同步zip打包，provider=holographic；~/.hermes/memories软链→~/Documents/work/jiayang/hermes-memory/（git仓库jiayang，记忆改动后commit+push）。
 §
+用户公司客户“北京数盾信息科技有限公司”，项目前缀“数盾”。有两个license项目需跟踪到期：数盾福建北斗边带外网-南平 和 数盾福建北斗边带内网，到期日2026-05-28。
+§
 H2目标7200万(月均1200万)，工厂需支撑5200万。HC规划（超总已批，2027-03前补完）：缺口101=PM14/AE53/DE(含数据开发)21/IE13。DE/IE重仓无锡、PM按地域、储备南京+无锡。PM人效10.2万→提效3倍30.6万/月；配比1:1.81:0.92:0.22。
 §
 飞书原生表格(block_type=31)可用：先建壳再填充，≤9行/行列积≤45，详见chinese-enterprise-document-writing skill。
 §
-南通驻场固定团队22人（PO类固定人头，明细见花名册文件）；运维负责人=万守刚。
+南通驻场固定团队22人（PO类固定人头，明细见花名册文件）；运维：万守刚=负责人，申梦娇（2026-01试用），陈钰8.17入职（3年云平台）。
 §
 软件工厂人效模型（2025）：产能利用率AE68.4%/DE67.9%/IE69.2%/数据70.4%；DE:AE=2.03:1（DE是瓶颈），IE:DE=0.42:1；前10项目占50%产能（海外招投标+苍南占21%）；Q1爬坡→Q2稳→Q3高峰→Q4冲刺→12月骤降；理想产能DE51人×260天×68%=9000人天；H2产出+27%，利用率AE+23%/IE+20%/DE+10%。
+§
+2025年软件工厂周计划Excel人天数（不含PM，以用户数字为准）：AE=4426, DE=9302, IE=3787, 数据开发=928, 合计18443。人效比DE:AE:IE≈2.0:1:0.9。周计划Excel路径模式：~/Library/Containers/com.tencent.WeWorkMac/Data/Documents/Profiles/*/Caches/Files/YYYY-MM/*/周计划资源投入记录列表.xlsx（Mac路径，Windows端在微信文件缓存对应目录找）。
 §
 招聘xlsx在~/Downloads（进度/画像/缺口），关注DE/IE/运维/数据开发。
 §
