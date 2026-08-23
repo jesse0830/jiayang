@@ -2,7 +2,7 @@ weixin限流ret=-2=服务端限流；gateway重启必须用venv/bin/python。
 §
 用户 OA 登录密码：1qw2!QW@
 §
-英语计划~/.hermes/english-plan.md（三阶段）；2026-08-06删全部定时任务。
+英语计划~/.hermes/english-plan.md（三阶段）。
 §
 OA自发起流程（license申请等）：首页工作台→流程→我发起的查看，勿去事件流工作台。
 §
@@ -10,13 +10,13 @@ OA报销：table行只取处理中；出纳付款/经办会计=未付(待报销)
 §
 PPT内容：文字模式优先，默认给markdown素材不生成.pptx，除非明确说'生成ppt文件'。
 §
-Holographic同步：~/.hermes/memories/{MEMORY,USER}.md+memory_store.db+SOUL.md+english-plan.md（zip打包），provider=holographic。
+Holographic同步zip打包，provider=holographic；~/.hermes/memories软链→~/Documents/work/jiayang/hermes-memory/（git仓库jiayang，记忆改动后commit+push）。
 §
 H2目标7200万(月均1200万)，工厂需支撑5200万。HC规划（超总已批，2027-03前补完）：缺口101=PM14/AE53/DE(含数据开发)21/IE13。DE/IE重仓无锡、PM按地域、储备南京+无锡。PM人效10.2万→提效3倍30.6万/月；配比1:1.81:0.92:0.22。
 §
 飞书原生表格(block_type=31)可用：先建壳再填充，≤9行/行列积≤45，详见chinese-enterprise-document-writing skill。
 §
-南通驻场固定团队22人（PO类固定人头，明细见花名册文件）；运维：万守刚=负责人，申梦娇=运维（2026-01试用）；陈钰运维8.17入职（3年云平台经验）。
+南通驻场固定团队22人（PO类固定人头，明细见花名册文件）；运维负责人=万守刚。
 §
 软件工厂人效模型（2025）：产能利用率AE68.4%/DE67.9%/IE69.2%/数据70.4%；DE:AE=2.03:1（DE是瓶颈），IE:DE=0.42:1；前10项目占50%产能（海外招投标+苍南占21%）；Q1爬坡→Q2稳→Q3高峰→Q4冲刺→12月骤降；理想产能DE51人×260天×68%=9000人天；H2产出+27%，利用率AE+23%/IE+20%/DE+10%。
 §
@@ -36,6 +36,6 @@ terminal guard坑：命令含绝对路径/引脚本崩(null byte)；规避=脚�
 §
 Obsidian vault=~/Documents/work/jiayang/obsidian-vault（13笔记+4主题，SSH443 push）；Documents/Obsidian Vault空壳勿用；Downloads/jiayang已删。
 §
-软件工厂花名册（96人）：98 hermes/软件工厂现有人员清单_20260817.md/.xlsx；飞书源wiki=I96KwwV4niowM6k5zecc9RLNnhd。TL：樊铁军/夏文天/戴忆婷/陈海媚；8.17入职5人明细在文件。
+软件工厂花名册（96人）：98 hermes/软件工厂现有人员清单_20260817.md/.xlsx；飞书源wiki=I96KwwV4niowM6k5zecc9RLNnhd。部长：配置开发部=王佩琪(副:欧阳紫康/陈玲玲)，集成验证部=刘亚朋，技术支撑部无部长。TL：DE=樊铁军/夏文天/陈海媚/田小伟，IE=戴忆婷。
 §
 绩效A/C记录：98 hermes/绩效A-C记录_2026年4-7月.md/.xlsx；连续3A高潜：刘培松/孔雨晴/顾睿；2次C：张俊鹏/王川石/田小伟/邰诗雨；王俊4A→5C波动大。
