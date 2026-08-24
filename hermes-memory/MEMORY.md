@@ -4,7 +4,7 @@ weixin限流ret=-2=服务端限流；gateway重启必须用venv/bin/python。
 §
 OA自发起流程（license申请等）：首页工作台→流程→我发起的查看，勿去事件流工作台。
 §
-OA报销：table行只取处理中；出纳付款/经办会计=未付(待报销)，支付确认=已付(过滤)；验证码pytesseract+ddddocr；CSV浏览器JS导出；流程见skill smardaten-oa；查完把待报销金额写结果文件+记忆摘要。
+OA报销：table只取处理中；出纳付款/经办会计=未付(待报销)，支付确认=已付(过滤)；验证码OCR；CSV浏览器JS导出；流程见skill smardaten-oa；查完写结果文件+记忆摘要。
 §
 PPT内容：文字模式优先，默认给markdown素材不生成.pptx，除非明确说'生成ppt文件'。
 §
@@ -36,6 +36,6 @@ terminal guard坑：含绝对路径/引脚本崩(null byte)；规避=脚本写/t
 §
 Obsidian vault=~/Documents/work/jiayang/obsidian-vault（SSH443 push；obsidian-git每5分钟自动commit+push）；左侧JesseYoung/=英语学习笔记区；简历在~/Documents/work/jiayang/Jesse/resume/（优化版md同目录，只要md不要Word）；Documents/Obsidian Vault空壳勿用。
 §
-软件工厂花名册96人：98 hermes/软件工厂现有人员清单_20260817.md/.xlsx；飞书wiki=I96KwwV4niowM6k5zecc9RLNnhd。部长：配置开发部=王佩琪，集成验证部=刘亚朋；TL：DE=樊铁军/夏文天/陈海媚/田小伟，IE=戴忆婷。
+软件工厂花名册96人（不含PM/AE；PM/AE属项目产品部）：98 hermes/软件工厂现有人员清单_20260817.md/.xlsx；飞书wiki=I96KwwV4niowM6k5zecc9RLNnhd。部长：配置开发部=王佩琪，集成验证部=刘亚朋；TL：DE=樊铁军/夏文天/陈海媚/田小伟，IE=戴忆婷。
 §
 绩效A/C记录：98 hermes/绩效A-C记录_2026年4-7月.md/.xlsx；连续3A：刘培松/孔雨晴/顾睿；2次C：张俊鹏/王川石/田小伟/邰诗雨。
