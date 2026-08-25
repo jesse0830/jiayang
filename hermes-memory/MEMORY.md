@@ -20,7 +20,7 @@ H2目标7200万(月均1200万)，工厂需支撑5200万。HC规划（超总已�
 §
 生成文件默认存放目录：~/Documents/work/smardaten/smardatenCorp/99-软件工厂/98 hermes（用户指定，不要再放Downloads）
 §
-千问已配：alibaba/qwen-plus，key在auth.json(label=qwen-dashscope)，base_url=国内站。坑：auth add固化国际站base_url致401须改auth.json。桌面app模型=会话级记忆，须手动切或config set。
+千问已配：key在auth.json(label=qwen-dashscope，字段access_token=sk-ws-前缀)，base_url国内站dashscope.aliyuncs.com。别名：qwen=plus、turbo=qwen-turbo、long=qwen-long、qwen37=qwen3.7-plus（仅CLI /model命令生效）。坑：auth add固化国际站base_url致401须改auth.json；qwen-long在CLI有消息格式不兼容（curl直连可用）；桌面app模型=会话级记忆，模型下拉框只显示内置目录(无turbo/long)，须手动切或config set。
 §
 WPS开放平台 appid=AK20260807SZZMPB appkey=58b9359e5afec5ba6c6cdb7c87e51ce0（应用JesseHermes）。坑：应用=企业自建应用，个人账号授权报NotCompanyUser；开发者后台仅限企业用户→个人需先创建团队/企业。scope用user_info,cloud_file,dbsheet.all；回调地址在安全设置配（非事件与回调）。
 §
@@ -31,3 +31,5 @@ terminal guard坑：命令含绝对路径/引脚本崩(null byte)；规避=脚�
 Obsidian vault=~/Documents/work/jiayang/obsidian-vault（SSH443 push，obsidian-git每5分钟自动commit+push）；左侧JesseYoung/=英语学习笔记区；简历在~/Documents/work/jiayang/Jesse/resume/（只要md不要Word）；Documents/Obsidian Vault空壳勿用。
 §
 软件工厂花名册与绩效A/C：98 hermes/软件工厂现有人员清单_20260817.md/.xlsx + 绩效A-C记录_2026年4-7月.md/.xlsx；飞书源wiki=I96KwwV4niowM6k5zecc9RLNnhd；部长：配置开发部=王佩琪(副:欧阳紫康/陈玲玲)、集成验证部=刘亚朋；TL：DE=樊铁军/夏文天/陈海媚/田小伟、IE=戴忆婷；连续3A高潜：刘培松/孔雨晴/顾睿。
+§
+免费模型待接入（用户需注册平台拿key后发我配置）：百度ERNIE Speed/Lite、腾讯混元lite、讯飞Spark Lite均永久免费；目前用户仅有阿里云百炼key。
