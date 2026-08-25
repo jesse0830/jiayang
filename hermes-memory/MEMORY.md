@@ -45,3 +45,5 @@ Obsidian vault=~/Documents/work/jiayang/obsidian-vault（13笔记+4主题，SSH4
 绩效A/C记录：98 hermes/绩效A-C记录_2026年4-7月.md/.xlsx；连续3A高潜：刘培松/孔雨晴/顾睿；2次C：张俊鹏/王川石/田小伟/邰诗雨；王俊4A→5C波动大。
 §
 数睿职位线：客户成功部二级负责人→项目产品部(三级)部长2024.02-2026.04→软件工厂(二级)厂长2026.04至今。
+§
+记忆容量上限已调：MEMORY.md=5000字符、USER.md=2500字符（hermes config set memory.memory_char_limit / memory.user_char_limit，2026-08-25）。
