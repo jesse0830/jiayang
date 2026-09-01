@@ -45,3 +45,5 @@ Obsidian vault=~/Documents/work/jiayang/obsidian-vault（SSH443 push，obsidian-
 免费模型待接入（用户需注册平台拿key后发我配置）：百度ERNIE Speed/Lite、腾讯混元lite、讯飞Spark Lite均永久免费；目前用户仅有阿里云百炼key。
 §
 集控PM决策责任=需求深度/政府验收时间与业主对清/业主商务接口；项目主导权错位=报价假设集控主导实际未交接；对吴恒明确要求=尽快明确政府验收时间、书面确认验收流程与标准、主导项目（数睿PM勿长期驻场）；边界文档
+§
+工作文档传git（提效方案等）：cp到 ~/Documents/work/jiayang/Jesse/PM-documents/ 再 commit+push（jiayang仓库，远程 git@github.com:jesse0830/jiayang.git）。对外汇报方案不放内部运营数据（产能利用率/H2目标/HC缺口/人效配比），详见 chinese-enterprise-document-writing skill。
