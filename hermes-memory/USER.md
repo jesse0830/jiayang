@@ -14,7 +14,7 @@ PBC IDP内容偏好：①IDP不等于业务目标/绩效考核——不能把PBC
 §
 全名：江苏数睿数据科技股份有限公司（SmarDaten）。公司简称数睿数据，英文名 SmarDaten。
 §
-飞书个人应用已配置：App ID = cli_aae2b96684b8dbc1。在需要读写飞书文档时使用。注意：个人应用只能读取已有文档、创建并修改自建文档；无法修改他人创建的文档（返回1770032 forBidden）。依赖 lark-oapi 库。
+飞书个人应用已配置：App ID = cli_aae2b96684b8dbc1，用于读表/建档。注意：1770032 forBidden 不只出现在改他人文档——读他人文档同样会报（token 换得到 ≠ 有文档权限），需先把文档分享给应用为「可阅读」；排障与通道决策见 skill feishu-app-config/references/document-read-access.md。
 §
 偏好直接简单的解决方案，复杂绕路会不满；先找最直接API/方法，不要先造复杂流程。
 §
