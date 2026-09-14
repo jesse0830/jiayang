@@ -10,3 +10,10 @@
 
 # macOS 系统文件
 .DS_Store
+
+# Large installers - never commit
+*.apk
+*.exe
+*.msi
+*.dmg
+*.zip
