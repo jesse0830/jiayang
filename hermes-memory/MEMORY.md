@@ -10,7 +10,7 @@ OA报销：流程细节见 skill smardaten-oa。查完必须把待报销金额�
 §
 PPT内容：文字模式优先，默认给markdown素材不生成.pptx，除非明确说'生成ppt文件'。
 §
-Holographic同步zip打包，provider=holographic；~/.hermes/memories软链→~/Documents/work/jiayang/hermes-memory/（git仓库jiayang，记忆改动后commit+push）。
+Holographic记忆：~/.hermes/memories软链→~/Documents/work/jiayang/hermes-memory/（git仓库jiayang，改动后commit+push）。事实库~/.hermes/memory_store.db被.gitignore排除、曾无备份，已用~/.hermes/scripts/export_holographic_facts.py导出holographic-facts.md（敏感值脱敏）并挂每周一9:00 cron（no_agent，job b5788e09ce1d）。
 §
 用户公司客户“北京数盾信息科技有限公司”，项目前缀“数盾”。有两个license项目需跟踪到期：数盾福建北斗边带外网-南平 和 数盾福建北斗边带内网，到期日2026-05-28。
 §
@@ -47,3 +47,5 @@ Obsidian vault=~/Documents/work/jiayang/obsidian-vault（SSH443 push，obsidian-
 集控PM决策责任=需求深度/政府验收时间与业主对清/业主商务接口；项目主导权错位=报价假设集控主导实际未交接；对吴恒明确要求=尽快明确政府验收时间、书面确认验收流程与标准、主导项目（数睿PM勿长期驻场）；边界文档
 §
 工作文档传git（提效方案等）：cp到 ~/Documents/work/jiayang/Jesse/PM-documents/ 再 commit+push（jiayang仓库，远程 git@github.com:jesse0830/jiayang.git）。对外汇报方案不放内部运营数据（产能利用率/H2目标/HC缺口/人效配比），详见 chinese-enterprise-document-writing skill。
+§
+提效方案（业务交付提质增效方案2026.9，王佩琪版）迭代约定：四大部分=背景/现状与问题/提升方案/落地计划，下分子主题+节，子主题名沿用原文不自创；不得含软件工厂运营数据；补充内容数字一律不新编（无数据处写“试点期校准”）。用户已裁定：8处导出丢失的表格先空着、IE暂不含（单独处理）。源在~/Downloads，成品+说明在98 hermes，重建脚本/tmp/rebuild_plan2.py。
