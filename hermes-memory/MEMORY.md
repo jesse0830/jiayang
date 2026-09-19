@@ -49,3 +49,5 @@ Obsidian vault=~/Documents/work/jiayang/obsidian-vault（SSH443 push，obsidian-
 工作文档传git（提效方案等）：cp到 ~/Documents/work/jiayang/Jesse/PM-documents/ 再 commit+push（jiayang仓库，远程 git@github.com:jesse0830/jiayang.git）。对外汇报方案不放内部运营数据（产能利用率/H2目标/HC缺口/人效配比），详见 chinese-enterprise-document-writing skill。
 §
 提效方案（业务交付提质增效方案2026.9，王佩琪版）迭代约定：四大部分=背景/现状与问题/提升方案/落地计划，下分子主题+节，子主题名沿用原文不自创；不得含软件工厂运营数据；补充内容数字一律不新编（无数据处写“试点期校准”）。用户已裁定：8处导出丢失的表格先空着、IE暂不含（单独处理）。源在~/Downloads，成品+说明在98 hermes，重建脚本/tmp/rebuild_plan2.py。
+§
+OA报销全量导出（含招待旧）：149笔/155492.34元/2024-03~2026-09；四来源=出差84+个人6+招待旧19+招待新40（招待旧/新接续，旧2024-06~2025-07）。踩坑：antd Tabs未激活面板仍在DOM，全局抓行会虚高（109→228），须限定.ant-tabs-tabpane内抓取与翻页。流程+列索引见 skill smardaten-oa/references/oa-expense-full-export.md。
