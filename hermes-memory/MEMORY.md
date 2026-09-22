@@ -38,7 +38,7 @@ MacBook Air M4：充电口MagSafe3非Type-C，2×雷电4口支持PD输入（上�
 §
 terminal guard坑：命令含绝对路径/引脚本崩(null byte)；规避=脚本写/tmp+PYTHONPATH= python3跑。飞书读表：wiki链接浏览器get_node拿obj_token→个人应用sheets API可读。汇报习惯：iPad开Word讲稿+电脑开PPT翻页。
 §
-Obsidian vault=~/Documents/work/jiayang/obsidian-vault（obsidian-git每5分钟自动commit+push，SSH443）；左侧JesseYoung/=英语学习笔记区；简历在~/Documents/work/jiayang/Jesse/resume/（只要md不要Word）；Documents/Obsidian Vault空壳勿用。iPhone同步未解决：GitSync（独立App非插件，iOS15.6+）卡欢迎页，已给飞行模式诊断+三通道（Gitee/手机代理/SSH），待用户回iOS版本/App开发者/手机能否开github.com；vault是大仓库子目录需subtree split拆独立仓库（否则手机笔记落在vault外）。详见skill obsidian-git-sync。
+Obsidian vault=~/Documents/work/jiayang/obsidian-vault，2026-09-21已拆为独立git仓库（108提交/53文件/.git 2.1M，origin=GitHub jesse0830/obsidian私有已推送）；父仓库jiayang已不跟踪vault，.git从129M压到13M（filter-repo剔历史大文件+force push；备份bundle=~/Documents/work/jiayang-backup-20260921.bundle，filter-repo装于~/Library/Python/3.9/bin）；obsidian-git每5分钟自动commit+push且已设pullBeforePush；2026-09-21补设git全局身份JesseYoung/jesse0830@users.noreply.github.com（原只挂在jiayang仓库级配置，vault拆分后失效会退化成假邮箱）
 §
 软件工厂花名册与绩效A/C：98 hermes/软件工厂现有人员清单_20260817.md/.xlsx + 绩效A-C记录_2026年4-7月.md/.xlsx；飞书源wiki=I96KwwV4niowM6k5zecc9RLNnhd；部长：配置开发部=王佩琪(副:欧阳紫康/陈玲玲)、集成验证部=刘亚朋，技术支撑部无部长；TL：DE=樊铁军/夏文天/陈海媚/田小伟、IE=戴忆婷；连续3A高潜：刘培松/孔雨晴/顾睿；2次C：张俊鹏/王川石/田小伟/邰诗雨；王俊4A→5C波动大。
 §
@@ -53,3 +53,5 @@ Obsidian vault=~/Documents/work/jiayang/obsidian-vault（obsidian-git每5分钟�
 OA报销全量导出（含招待旧）：149笔/155492.34元/2024-03~2026-09；四来源=出差84+个人6+招待旧19+招待新40（招待旧/新接续，旧2024-06~2025-07）。踩坑：antd Tabs未激活面板仍在DOM，全局抓行会虚高（109→228），须限定.ant-tabs-tabpane内抓取与翻页。流程+列索引见 skill smardaten-oa/references/oa-expense-full-export.md。
 §
 网络通道（2026-09-21实测）：Mac跑Clash系统代理127.0.0.1:7897，github.com只有走代理才通（浏览器正常而裸curl/git直连超时属预期，非被墙）；同时刻api.github.com 200、codeload 301、github.com SSH 22与443均可认证。探通道前先scutil --proxy，可curl -x 127.0.0.1:7897 复测。
+§
+iPhone 端 Obsidian 同步=obsidian-git 插件（非 GitSync App）；iOS 不支持 SSH→只能 HTTPS+PAT，克隆前先填用户名+Token；手机端同步入口=屏幕顶部下拉（无 ribbon，插件图标在导航栏☰）。步骤见 skill obsidian-git-sync。
