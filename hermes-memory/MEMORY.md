@@ -10,7 +10,7 @@ OA报销：流程细节见 skill smardaten-oa。查完必须把待报销金额�
 §
 PPT内容：文字模式优先，默认给markdown素材不生成.pptx，除非明确说'生成ppt文件'。
 §
-Holographic记忆：~/.hermes/memories软链→~/Documents/work/jiayang/hermes-memory/（git仓库jiayang，改动后commit+push）。事实库~/.hermes/memory_store.db被.gitignore排除、曾无备份，已用~/.hermes/scripts/export_holographic_facts.py导出holographic-facts.md（敏感值脱敏）并挂每周一9:00 cron（no_agent，job b5788e09ce1d）。
+Holographic记忆同步：git仓库jiayang的hermes-memory/为唯一真源——Mac端~/.hermes/memories软链过去；Windows桌面版hermes-home/memories已用junction指向C:\Users\jesse\Documents\JesseDocuments\jiayang\hermes-memory（写入即落git仓库）。同步方式=用户定期让agent手动commit+push（非自动）。Windows端内置记忆上限已调memory.memory_char_limit=8000/user_char_limit=2500（默认2200装不下）。事实库memory_store.db被.gitignore排除，Mac端用scripts/export_holographic_facts.py导出holographic-facts.md（敏感值脱敏）并挂每周一9:00 cron（no_agent，job b5788e09ce1d）。
 §
 用户公司客户“北京数盾信息科技有限公司”，项目前缀“数盾”。有两个license项目需跟踪到期：数盾福建北斗边带外网-南平 和 数盾福建北斗边带内网，到期日2026-05-28。
 §
@@ -55,3 +55,5 @@ OA报销全量导出（含招待旧）：149笔/155492.34元/2024-03~2026-09；�
 网络通道（2026-09-21实测）：Mac跑Clash系统代理127.0.0.1:7897，github.com只有走代理才通（浏览器正常而裸curl/git直连超时属预期，非被墙）；同时刻api.github.com 200、codeload 301、github.com SSH 22与443均可认证。探通道前先scutil --proxy，可curl -x 127.0.0.1:7897 复测。
 §
 iPhone 端 Obsidian 同步=obsidian-git 插件（非 GitSync App）；iOS 不支持 SSH→只能 HTTPS+PAT，克隆前先填用户名+Token；手机端同步入口=屏幕顶部下拉（无 ribbon，插件图标在导航栏☰）。步骤见 skill obsidian-git-sync。
+§
+Windows端Obsidian+git（2026-09-22建成）：Obsidian=C:\software\obsidian\Obsidian.exe（vault配置在~/AppData/Roaming/obsidian/obsidian.json）；vault=克隆C:\Users\jesse\Documents\JesseDocuments\jiayang\obsidian-vault（origin git@github.com:jesse0830/obsidian.git，分支master）；已设repo级core.autocrlf=false保LF、身份JesseYoung/jesse0830@users.noreply.github.com；jiayang仓库.gitignore已排除obsidian-vault/。Windows的git=Hermes自带~/AppData/Local/hermes/git（cmd/已在用户PATH，GUI程序可用），SSH key就绪，obsidian-git插件启动即fetch（已实测）。
