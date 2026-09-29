@@ -6,7 +6,7 @@ weixin限流ret=-2=服务端限流；gateway重启必须用venv/bin/python。
 §
 OA自发起流程（license申请等）：首页工作台→流程→我发起的查看，勿去事件流工作台。
 §
-OA报销：流程细节见 skill smardaten-oa。查完必须把待报销金额写结果文件（98 hermes/OA待报销金额汇总_*.md）+更新 skill 基准快照。最新 2026-09-17 = 10532.19 元 / 15 笔（招待 7806.42 + 出差 2725.77 + 个人 0），与 09-09 完全一致（8 天零进展）；另有 2 笔草稿未提交 2523.70。
+OA报销：流程细节见 skill smardaten-oa。查完必须把待报销金额写结果文件（98 hermes/OA待报销金额汇总_*.md）+更新 skill 基准快照+更新本条。最新 2026-09-29 = 39796.84 元 / 21 笔（招待 13196.13/12 笔 + 出差 2725.77/8 笔 + 个人 23874.94/1 笔＝软件工厂Q3团建，卡总裁审批）；较 09-17 的 10532.19/15 笔增 29264.65。出差 2725.77 自 08-15 起卡出纳付款未动。
 §
 PPT内容：文字模式优先，默认给markdown素材不生成.pptx，除非明确说'生成ppt文件'。
 §
@@ -48,7 +48,7 @@ Obsidian vault=~/Documents/work/jiayang/obsidian-vault，2026-09-21已拆为独�
 §
 工作文档传git（提效方案等）：cp到 ~/Documents/work/jiayang/Jesse/PM-documents/ 再 commit+push（jiayang仓库，远程 git@github.com:jesse0830/jiayang.git）。对外汇报方案不放内部运营数据（产能利用率/H2目标/HC缺口/人效配比），详见 chinese-enterprise-document-writing skill。
 §
-提效方案（业务交付提质增效方案2026.9，王佩琪版）迭代约定：四大部分=背景/现状与问题/提升方案/落地计划，下分子主题+节，子主题名沿用原文不自创；不得含软件工厂运营数据；补充内容数字一律不新编（无数据处写“试点期校准”）。用户已裁定：8处导出丢失的表格先空着、IE暂不含（单独处理）。源在~/Downloads，成品+说明在98 hermes，重建脚本/tmp/rebuild_plan2.py。
+提效方案（业务交付提质增效方案2026.9，王佩琪版）迭代约定：四大部分=背景/现状与问题/提升方案/落地计划，子主题名沿用原文不自创；不得含软件工厂运营数据；数字一律不新编（无数据处写“试点期校准”）。用户裁定：8处丢失表格先空着、IE暂不含。源在~/Downloads，成品+说明+重建脚本在98 hermes与jiayang仓库Jesse/PM-documents。补充稿：第3章3.1-3.6（v1.2 含帛飞特实测锚点：按传统配比1:1:3:1同范围297人天→实际168人天、降43.4%，区间43.4%~53.3%引用取下限）、1.2基线+4.2指标补列、服务编排协作模式（八达光电实践）落地。八达光电=协作模式可落地提效（非加班安排）：需求调研工具原型>90%可用+自动映射数据库实体→研发SWE生成服务编排JavaBean→配置仅30%时间页面微调/按钮逻辑/验证；服务编排是工厂最大工作量（3.3(3)单点8.5个百分点最大）。
 §
 OA报销全量导出（含招待旧）：149笔/155492.34元/2024-03~2026-09；四来源=出差84+个人6+招待旧19+招待新40（招待旧/新接续，旧2024-06~2025-07）。踩坑：antd Tabs未激活面板仍在DOM，全局抓行会虚高（109→228），须限定.ant-tabs-tabpane内抓取与翻页。流程+列索引见 skill smardaten-oa/references/oa-expense-full-export.md。
 §
@@ -57,3 +57,4 @@ OA报销全量导出（含招待旧）：149笔/155492.34元/2024-03~2026-09；�
 iPhone 端 Obsidian 同步=obsidian-git 插件（非 GitSync App）；iOS 不支持 SSH→只能 HTTPS+PAT，克隆前先填用户名+Token；手机端同步入口=屏幕顶部下拉（无 ribbon，插件图标在导航栏☰）。步骤见 skill obsidian-git-sync。
 §
 Windows端Obsidian+git（2026-09-22建成）：Obsidian=C:\software\obsidian\Obsidian.exe（vault配置在~/AppData/Roaming/obsidian/obsidian.json）；vault=克隆C:\Users\jesse\Documents\JesseDocuments\jiayang\obsidian-vault（origin git@github.com:jesse0830/obsidian.git，分支master）；已设repo级core.autocrlf=false保LF、身份JesseYoung/jesse0830@users.noreply.github.com；jiayang仓库.gitignore已排除obsidian-vault/。Windows的git=Hermes自带~/AppData/Local/hermes/git（cmd/已在用户PATH，GUI程序可用），SSH key就绪，obsidian-git插件启动即fetch（已实测）。
+文档版本约定（用户 2026-09-29 定）：每生成/修改一份文档都要标版本号，v1.0 起递加 v1.1/v1.2，标在文件名末尾与文档头，修订不改名换号。
