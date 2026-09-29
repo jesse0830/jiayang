@@ -48,10 +48,12 @@ Obsidian vault=~/Documents/work/jiayang/obsidian-vault，2026-09-21已拆为独�
 §
 工作文档传git（提效方案等）：cp到 ~/Documents/work/jiayang/Jesse/PM-documents/ 再 commit+push（jiayang仓库，远程 git@github.com:jesse0830/jiayang.git）。对外汇报方案不放内部运营数据（产能利用率/H2目标/HC缺口/人效配比），详见 chinese-enterprise-document-writing skill。
 §
-提效方案（业务交付提质增效方案2026.9，王佩琪版）迭代约定：四大部分=背景/现状与问题/提升方案/落地计划，下分子主题+节，子主题名沿用原文不自创；不得含软件工厂运营数据；补充内容数字一律不新编（无数据处写“试点期校准”）。用户已裁定：8处导出丢失的表格先空着、IE暂不含（单独处理）。源在~/Downloads，成品+说明在98 hermes，重建脚本/tmp/rebuild_plan2.py。
+提效方案（业务交付提质增效方案2026.9，王佩琪版）迭代约定：四大部分=背景/现状与问题/提升方案/落地计划，下分子主题+节，子主题名沿用原文不自创；不得含软件工厂运营数据；补充内容数字一律不新编（无数据处写“试点期校准”）。用户已裁定：8处导出丢失的表格先空着、IE暂不含（单独处理）。源在~/Downloads，成品+说明在98 hermes，重建脚本/tmp/rebuild_plan2.py。已完成补充稿：第3章3.1-3.6、1.2基线+4.2指标补列、服务编排协作模式（八达光电实践）落地（均20260923/20260929，同步推jiayang仓库Jesse/PM-documents）。八达光电=协作模式可落地提效（非假期/加班安排）：交付中心需求调研工具原型>90%可用+自动映射数据库实体→研发SWE生成服务编排JavaBean→配置仅30%时间页面微调/按钮逻辑/验证；服务编排是工厂最大工作量，对应3.3(3)单点8.5个百分点最大。
 §
 OA报销全量导出（含招待旧）：149笔/155492.34元/2024-03~2026-09；四来源=出差84+个人6+招待旧19+招待新40（招待旧/新接续，旧2024-06~2025-07）。踩坑：antd Tabs未激活面板仍在DOM，全局抓行会虚高（109→228），须限定.ant-tabs-tabpane内抓取与翻页。流程+列索引见 skill smardaten-oa/references/oa-expense-full-export.md。
 §
 网络通道（2026-09-21实测）：Mac跑Clash系统代理127.0.0.1:7897，github.com只有走代理才通（浏览器正常而裸curl/git直连超时属预期，非被墙）；同时刻api.github.com 200、codeload 301、github.com SSH 22与443均可认证。探通道前先scutil --proxy，可curl -x 127.0.0.1:7897 复测。
 §
 iPhone 端 Obsidian 同步=obsidian-git 插件（非 GitSync App）；iOS 不支持 SSH→只能 HTTPS+PAT，克隆前先填用户名+Token；手机端同步入口=屏幕顶部下拉（无 ribbon，插件图标在导航栏☰）。步骤见 skill obsidian-git-sync。
+§
+文档版本约定（用户 2026-09-29 定）：每生成/修改一份文档都要标版本号，v1.0 起递加 v1.1/v1.2，标在文件名末尾与文档头，修订不改名换号。
