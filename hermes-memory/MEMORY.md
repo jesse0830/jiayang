@@ -57,4 +57,5 @@ OA报销全量导出（含招待旧）：149笔/155492.34元/2024-03~2026-09；�
 iPhone 端 Obsidian 同步=obsidian-git 插件（非 GitSync App）；iOS 不支持 SSH→只能 HTTPS+PAT，克隆前先填用户名+Token；手机端同步入口=屏幕顶部下拉（无 ribbon，插件图标在导航栏☰）。步骤见 skill obsidian-git-sync。
 §
 Windows端Obsidian+git（2026-09-22建成）：Obsidian=C:\software\obsidian\Obsidian.exe（vault配置在~/AppData/Roaming/obsidian/obsidian.json）；vault=克隆C:\Users\jesse\Documents\JesseDocuments\jiayang\obsidian-vault（origin git@github.com:jesse0830/obsidian.git，分支master）；已设repo级core.autocrlf=false保LF、身份JesseYoung/jesse0830@users.noreply.github.com；jiayang仓库.gitignore已排除obsidian-vault/。Windows的git=Hermes自带~/AppData/Local/hermes/git（cmd/已在用户PATH，GUI程序可用），SSH key就绪，obsidian-git插件启动即fetch（已实测）。
+§
 文档版本约定（用户 2026-09-29 定）：每生成/修改一份文档都要标版本号，v1.0 起递加 v1.1/v1.2，标在文件名末尾与文档头，修订不改名换号。
