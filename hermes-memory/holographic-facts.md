@@ -1,8 +1,8 @@
 # Holographic 事实库导出
 
 **来源**：`~/.hermes/memory_store.db`（SQLite 二进制库，被 `.gitignore` 排除，本文件是它的可读备份）
-**导出时间**：2026-09-29
-**条目数**：24 条事实 / 3 个实体
+**导出时间**：2026-10-12
+**条目数**：28 条事实 / 4 个实体
 
 > 敏感值（appkey / token / 密钥）已脱敏为 `[REDACTED]`，完整值只存在本地库。
 > 事实库由 Hermes `fact_store` 工具维护（`add` / `update` / `remove`），本文件是只读导出，请勿直接编辑。
@@ -43,6 +43,8 @@
   Holographic memory system test - cross device sync
 - **id=4 | 2026-07-26**  
   MCP记忆桥 (port 60194) 连接 Hermes 和 WorkBuddy 的记忆系统。MCP服务器在 ~/.hermes/scripts/memory_mcp_server.py，启动脚本 ~/.hermes/scripts/start_memory_bridge.sh。WorkBuddy 的 .mcp.json 已注册 hermes-memory 服务。Hermes config.yaml 已注册 memory-bridge 服务。暴露6个MCP工具：get_user_profile, get_memory_notes, get_all_memory, search_memory, add_to_memory, get_facts。
+- **id=25 | 2026-10-05**  
+  三生态接线完成（2026-10-05）：①内容生态=GitHub jesse0830/obsidian 仓库（本地 obsidian-vault 兼作 LLM Wiki.app 工作区）；hermes 经 app 自带 MCP server（stdio）接入，配置在 ~/.hermes/config.yaml 的 mcp_servers.llm-wiki（command=/Users/jesseyoung/.local/bin/node，args=app 内 mcp-server/dist/src/index.js），实测 Connected 并发现 12 个工具 llm_wiki_status/projects/set_project/files/read_file/search/chat/graph/reviews/rescan_sources/embed_page/write_page；前提=app 必须开着 + app-state.json 的 apiConfig.mcpEnabled=true / allowUnauthenticated=true（allowLanAccess=false 仅本机）+ 探针解释器 ~/.hermes/hermes-agent/venv/bin/python。②jiayang 仓库=工作交付+hermes 生态：hermes-memory/（~/.hermes/memories 软链）与 hermes-skills/（~/.hermes/skills 软链，872 文件，排除 .curator_backups 13M）。③推送通道：直连 SSH 超时时用 GIT_SSH_COMMAND 加 ProxyCommand '/usr/bin/nc -X 5 -x 127.0.0.1:7897 %h %p'。远端已核对一致：jiayang master=29eeb66，obsidian master=1ad076f。
 
 ## 📌 通用
 
@@ -68,9 +70,16 @@
   数睿职位线：客户成功部二级负责人→项目产品部(三级)部长2024.02-2026.04→软件工厂(二级)厂长2026.04至今。
 - **id=24 | 2026-09-29**  
   文档版本约定（用户 2026-09-29 定）：每生成/修改一份文档都要标版本号，v1.0 起递加 v1.1/v1.2，标在文件名末尾与文档头，修订不改名换号。
+- **id=26 | 2026-10-05**  
+  三生态接线（2026-10-05）：内容=obsidian 仓库（vault 兼作 LLM Wiki.app 工作区，app 须开着）；hermes 经 MCP stdio 调其 12 工具（config: mcp_servers.llm-wiki）；jiayang 仓库=交付+hermes 生态（hermes-memory/、hermes-skills/，均软链）。详 wiki/concepts/wiki-obsidian-hermes-生态.md v1.3。
+- **id=27 | 2026-10-09**  
+  MBA备考日更：每天30道数学题（答案统一在文件末页、文件名 MBA数学每日30题_YYYYMMDD_v1.0、真题改编18+仿真12、选项打乱使A—E各6题），生成器/复核器模板与流程见 skill study-material-production。
+- **id=28 | 2026-10-10**  
+  读写笔记App=讯飞Doxent，会议纪要已接 vault 读写笔记/（导出器 _工具/doxent_export.py v1.4，详见 skill closed-app-data-extraction）。
 
 ## 🔗 实体（用于代数推理）
 
 - `一、2025年人效分析（WorkBuddy数据分析）`（unknown）
 - `完成20+个项目验收`（unknown）
 - `约800多万`（unknown）
+- `/usr/bin/nc -X 5 -x 127.0.0.1:7897 %h %p`（unknown）
