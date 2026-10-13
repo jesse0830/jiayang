@@ -26,6 +26,7 @@
    hermes mcp list            # 该 server 在列
    hermes mcp test <name>     # Connected + 工具数（LLM Wiki 实测 12 个工具）
    ```
+   `hermes mcp test` 只证明**握手**成功（进程起来了、工具列表拉到了）；向用户报「已接通」之前，再用同一路径真调一个**只读**工具（搜索 / 列文件 / 读一页）拿到真实数据——test 过后真调失败的情形真的存在。
    注册名规则：`mcp_<server>_<tool>`（连字符/点会把换成下划线），在会话里直接调用。
 6. **给用户写清前提**：app 必须处于运行状态，Hermes 才能拉起这个 stdio server；app 升级后 server 路径可能变，需重新核对。
 
@@ -50,3 +51,5 @@
 
 - 别用 `ls -d ~/Library/Application Support/*wiki*` 这种 glob 扫 Application Support：目录多、命中慢，实测会超时（exit 124）；直接读确定的 bundle-id 路径。
 - 探测用的临时脚本、输出都放 `~/.hermes/cache/scratch/`，别污染工作目录。
+- **找 Hermes venv 不要猜路径**：`~/.venv` / `~/hermes/venv` 这类猜法都错，直接 `grep -n "VENV\|python" ~/.local/bin/hermes` 看启动器里写死的解释器路径。
+- 汇报时把「app 必须开着」写在最前面：MCP server 是该 app 拉起的子进程，app 一关工具就全没了（这是用户最容易踩的前提）。

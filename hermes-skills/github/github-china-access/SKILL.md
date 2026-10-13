@@ -43,6 +43,16 @@ Phone-side clones (GitSync etc.) have **no** such proxy, so an HTTPS remote that
 4. **Verify remotely** (don't trust push output alone):
    `curl -s -m 15 "https://api.github.com/repos/<owner>/<repo>/contents/<path>"` → confirm the file/folder landed.
 
+## Push/pull through the local proxy (SSH remotes, no remote rewrite)
+
+When the remote is already `git@github.com:...` and direct SSH stalls, you do **not** have to switch the remote to `ssh.github.com:443` — route that one command through the Clash-style proxy with a per-command SSH override:
+```bash
+GIT_SSH_COMMAND="ssh -o ConnectTimeout=25 -o ServerAliveInterval=5 -o ProxyCommand='/usr/bin/nc -X 5 -x 127.0.0.1:7897 %h %p'" git push origin master
+```
+- `nc -X 5` = SOCKS5; the Clash port usually accepts both. For HTTP CONNECT only: `nc -X connect -x 127.0.0.1:7897 %h %p`.
+- Scoped to that single command (nothing left in config); in a script export it once (`SSHCMD='ssh -o ...'`) and reuse: `GIT_SSH_COMMAND="$SSHCMD" git push` and `GIT_SSH_COMMAND="$SSHCMD" git ls-remote origin refs/heads/master` for the remote-SHA check.
+- macOS has no `timeout`, so hard-bound the connection with ssh's own `-o ConnectTimeout` / `-o ServerAliveInterval`.
+
 ## Pitfalls
 
 - **gh-proxy/codeload tarballs don't support byte-range resume** (`curl -C -` → HTTP 56). Download must finish in one shot; use generous `-m` and retry whole-file.

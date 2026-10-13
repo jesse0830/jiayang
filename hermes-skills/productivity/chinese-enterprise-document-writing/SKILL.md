@@ -1,7 +1,7 @@
 ---
 name: chinese-enterprise-document-writing
 description: "Write formal Chinese documents — workplace action plans, survey analysis reports, meeting minutes, improvement plans, official notices, project success case summaries, AND academic research reports (调研报告/课题报告) for university course projects. Handles tone calibration (formal vs. warm vs. academic), evidence-based structure, large-file incremental generation, and common pitfalls."
-version: 1.6.0
+version: 1.7.0
 ---
 
 # Chinese Enterprise Document Writing
@@ -11,7 +11,11 @@ Write formal Chinese workplace documents for internal company use. Covers action
 ## When to Use
 
 - User asks for a "正式文档" / "官方材料" / "行动计划" / "方案"
+- User asks for 组织人事类材料：「人员画像」/「岗位画像」/「任职资格」/「面试评分表」/「岗位 JD」，尤其场景是「要换人重招、明天拿去和上级讨论」 → 按 `references/role-profile-and-hiring.md` 的流程做（换人根因 → 胜任项 → 权重 → 面试题 → 红旗 → 30/60/90 天验收）。
+- **没取证的数字不硬编（用户硬约定）**：写画像/方案前先把手里现有资料翻一遍建档；台账、财务、职级、薪酬带宽等无法取证的一律标 `【待对清】`，只写可引用的现成事实（人数、比例、指标责任人、待办状态），不按达标口径替用户下结论。
 - **每生成或修改一份文档都必须标递增版本号（用户硬约定）**：新建从 v1.0 起，每次修订 v1.1 / v1.2 累加，文件名末尾与文档头版本行同时标；修订不换名，但版本号必须递加，否则用户分不清哪份是哪一版。
+- **素材读取纪律（省几轮返工）**：写长文档前先锁定「具名文件清单」，再**一次只读 1-2 个文件、单次限 6500 字符左右，或只打印含关键词的行**；一次把多份资料全 dump 出来，输出会被上下文压缩裁成一行，等于没读到（同一批量重试也一样）。宁多几轮，不一次全读。
+- User asks 结合知识库整理 2-3 条「XX 痛点」/「案例素材」（内部训战营、课件、向上汇报）→ 按 `references/management-case-material.md`：每条＝现象（一手原话+项目事实）→ 管理根因（缺哪条机制）→ 抓手（3 条可落地动作），主推 2-3 条＋备选 2 条＋一句发送建议。抽象框架词 grep 0 命中不等于没素材，要逐篇读纪要 AI 纪要段做语义归纳。
 - **数字表要能自己对上加总**：可加项表在合计行下补一行「逐行相加核对」；同一批收益的两种口径（工时口径 / 环节口径）必须写明「互为印证、不可相加」；用户问「加起来是多少」时按「可见行之和 → 整表合计 → 缺哪几行/是否旧版本」三段答。详见 `references/measurement-additivity-and-reconciliation.md`
 - **给已有内部方案补写／迭代某一章（用户随后分轮追加、修正措施）** → 按 `references/improvement-plan-iteration.md` 的约定做：patch 定点改＋grep 核对结构＋回复给改动后那一条的全文＋列 1~2 个待确认口径；简化类措施必须同时写审核卡点；**新写的内容默认并入既有稿件的对应条目、不新起独立文件**（融合落点与撤销独立稿的三步见该 reference）
 - **需要量化指标／提效预估（"给我预估的效率指标"、"整体综合提效按超过30%"、"要么缩短周期要么降低人员投入"）** → 按 `references/quantified-efficiency-estimates.md` 做：环节权重法＋角色配比法双算法交叉验证、只引用方案内已有基线、每个分项落到缩短周期或降低人员投入、同一份工时不可双算；用户另给**真实项目工作量截图**做实测锚点时，按同文件的「实测锚点」节处理（含用户口头比例与截图数字不一致时怎么落文）

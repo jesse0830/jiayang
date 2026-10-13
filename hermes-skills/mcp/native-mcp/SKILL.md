@@ -237,7 +237,8 @@ pip install --upgrade mcp
 - Check that the server is listed under `mcp_servers` (not `mcp` or `servers`)
 - Ensure the YAML indentation is correct
 - Look at Hermes Agent startup logs for connection messages
-- Tool names are prefixed with `mcp_{server}_{tool}` -- look for that pattern
+- **A server added while an agent/gateway process is already running does NOT appear in that process's sessions.** Discovery runs once at startup (no hot-reload), so a long-lived process keeps its startup snapshot. `hermes mcp list` and `hermes tools list` probe a *new* process and can both report "enabled" while the live session's tool catalog still lacks the tools. Verify from inside the running session (search the session's tool catalog for the server name); fix by restarting the long-running process — for the desktop app that is the gateway (`hermes gateway restart`), which briefly interrupts in-flight sessions, so pick a quiet moment.
+- Tool naming: the documented pattern is `mcp_{server}_{tool}`, but current builds may surface MCP tools in the deferred catalog with double underscores (`mcp__{server}__{tool}`). Search by the **server name**, not by an assumed underscore style.
 
 ### Connection keeps dropping
 

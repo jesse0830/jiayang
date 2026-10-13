@@ -4,13 +4,13 @@ weixin限流ret=-2=服务端限流；gateway重启必须用venv/bin/python。
 §
 英语计划~/.hermes/english-plan.md（三阶段）。
 §
-OA自发起流程（license申请等）：首页工作台→流程→我发起的查看，勿去事件流工作台。
+OA自发起流程：首页工作台→流程→我发起的，勿去事件流工作台。
 §
-OA报销：流程细节见 skill smardaten-oa。查完必须把待报销金额写结果文件（98 hermes/OA待报销金额汇总_*.md）+更新 skill 基准快照+更新本条。最新 2026-09-29 = 39796.84 元 / 21 笔（招待 13196.13/12 笔 + 出差 2725.77/8 笔 + 个人 23874.94/1 笔＝软件工厂Q3团建，卡总裁审批）；较 09-17 的 10532.19/15 笔增 29264.65。出差 2725.77 自 08-15 起卡出纳付款未动。
+OA报销：流程见 skill smardaten-oa。查完写结果文件（98 hermes/OA待报销金额汇总_*.md 带版本号）+更新 skill 快照。最新 2026-10-08 = 39796.84/21 笔（招待 13196.13+出差 2725.77+个人 23874.94 Q3团建）；21 笔均停在出纳付款；出差 501.91 滞留 317 天。
 §
-PPT内容：文字模式优先，默认给markdown素材不生成.pptx，除非明确说'生成ppt文件'。
+PPT：默认给markdown素材不生成.pptx，除非明说'生成pptx文件'。
 §
-Holographic记忆同步：git仓库jiayang的hermes-memory/为唯一真源——Mac端~/.hermes/memories软链过去；Windows桌面版hermes-home/memories已用junction指向C:\Users\jesse\Documents\JesseDocuments\jiayang\hermes-memory（写入即落git仓库）。同步方式=用户定期让agent手动commit+push（非自动）。Windows端内置记忆上限已调memory.memory_char_limit=8000/user_char_limit=2500（默认2200装不下）。事实库memory_store.db被.gitignore排除，Mac端用scripts/export_holographic_facts.py导出holographic-facts.md（敏感值脱敏）并挂每周一9:00 cron（no_agent，job b5788e09ce1d）。
+Holographic记忆同步：jiayang仓库hermes-memory/为真源——Mac端~/.hermes/memories软链；Windows hermes-home/memories用junction指向...\jiayang\hermes-memory。同步=用户定期让agent手动commit+push。Windows端memory_char_limit=8000/user_char_limit=2500。memory_store.db被gitignore排除，Mac端scripts/export_holographic_facts.py导出holographic-facts.md（脱敏），周一9:00 cron（job b5788e09ce1d）。
 §
 用户公司客户“北京数盾信息科技有限公司”，项目前缀“数盾”。有两个license项目需跟踪到期：数盾福建北斗边带外网-南平 和 数盾福建北斗边带内网，到期日2026-05-28。
 §
@@ -28,34 +28,38 @@ H2目标7200万(月均1200万)，工厂需支撑5200万。HC规划（超总已�
 §
 合契枢=任务管理工具（周排产2026W32=8227条；模块：任务/缺陷/跟踪/分配/变更/产出/导出；字段：需求名/责任人/类型/复杂度4级/计划起止），鉴策行=PM周五提订单；排产按AE/DE/IE/数据开发，AE已划项目产品部。痛点：工时填报无审批、超8h填满致财经无法核算；方案=工时审批给PM。DE考核：bug日清前五打C，拟优化多维度。
 §
-生成文件默认存放目录：~/Documents/work/smardaten/smardatenCorp/99-软件工厂/98 hermes（用户指定，不要再放Downloads）
+98 hermes 全路径=~/Documents/work/smardaten/smardatenCorp/99-软件工厂/98 hermes（勿放Downloads）。
 §
 千问已配：key在auth.json(label=qwen-dashscope，字段access_token=sk-ws-前缀)，base_url国内站dashscope.aliyuncs.com。别名：qwen=plus、turbo=qwen-turbo、long=qwen-long、qwen37=qwen3.7-plus（仅CLI /model命令生效）。坑：auth add固化国际站base_url致401须改auth.json；qwen-long在CLI有消息格式不兼容（curl直连可用）；桌面app模型=会话级记忆，模型下拉框只显示内置目录(无turbo/long)，须手动切或config set。
 §
 WPS开放平台 appid=AK20260807SZZMPB appkey=58b9359e5afec5ba6c6cdb7c87e51ce0（应用JesseHermes）。坑：应用=企业自建应用，个人账号授权报NotCompanyUser；开发者后台仅限企业用户→个人需先创建团队/企业。scope用user_info,cloud_file,dbsheet.all；回调地址在安全设置配（非事件与回调）。
 §
-MacBook Air M4：充电口MagSafe3非Type-C，2×雷电4口支持PD输入（上限约70W，90W显示器反向供电可用）。
-§
 terminal guard坑：命令含绝对路径/引脚本崩(null byte)；规避=脚本写/tmp+PYTHONPATH= python3跑。飞书读表：wiki链接浏览器get_node拿obj_token→个人应用sheets API可读。汇报习惯：iPad开Word讲稿+电脑开PPT翻页。
 §
-Obsidian vault=~/Documents/work/jiayang/obsidian-vault，2026-09-21已拆为独立git仓库（108提交/53文件/.git 2.1M，origin=GitHub jesse0830/obsidian私有已推送）；父仓库jiayang已不跟踪vault，.git从129M压到13M（filter-repo剔历史大文件+force push；备份bundle=~/Documents/work/jiayang-backup-20260921.bundle，filter-repo装于~/Library/Python/3.9/bin）；obsidian-git每5分钟自动commit+push且已设pullBeforePush；2026-09-21补设git全局身份JesseYoung/jesse0830@users.noreply.github.com（原只挂在jiayang仓库级配置，vault拆分后失效会退化成假邮箱）
+Obsidian vault=~/Documents/work/jiayang/obsidian-vault（独立仓库 origin=jesse0830/obsidian；obsidian-git 每5分钟自动 commit+push+pullBeforePush；git 全局身份 JesseYoung）。
 §
 软件工厂绩效（调薪规则=连续2个季度窗口内≥3A且无C；2026窗口=4-9月）：v1.2报告 98 hermes/软件工厂绩效分析_2026年4-9月窗口_20261001_v1.2.md/.xlsx（7页签，生成器perf_v3_report.py；源wiki=I96KwwV4niowM6k5zecc9RLNnhd）。已达标5=周婷婷/孔雨晴/刘培松/顾睿/孔令辉；临界需9月A共8=降温(季智/王佩琪/王晴)+最热(胡学生/杨军/汪靖/孙堂颖/戴忆婷)；出局18含王俊(2A1C)。坑：6月表12格#REF!（重存丢sheet）已双源恢复。解析见skill smardaten-perf-analysis
 §
-免费模型待接入（用户需注册平台拿key后发我配置）：百度ERNIE Speed/Lite、腾讯混元lite、讯飞Spark Lite均永久免费；目前用户仅有阿里云百炼key。
+免费模型候选（需注册key）：百度ERNIE Speed/Lite、腾讯混元lite、讯飞Spark Lite；已有阿里云百炼key。
 §
-集控PM决策责任=需求深度/政府验收时间与业主对清/业主商务接口；项目主导权错位=报价假设集控主导实际未交接；对吴恒明确要求=尽快明确政府验收时间、书面确认验收流程与标准、主导项目（数睿PM勿长期驻场）；边界文档
+集控PM：决策责任=需求深度/政府验收时间与业主对清/商务接口；主导权错位（报价假设集控主导未交接）；对吴恒要求=尽快明确验收时间+书面确认验收流程与标准+主导项目。
 §
 工作文档传git（提效方案等）：cp到 ~/Documents/work/jiayang/Jesse/PM-documents/ 再 commit+push（jiayang仓库，远程 git@github.com:jesse0830/jiayang.git）。对外汇报方案不放内部运营数据（产能利用率/H2目标/HC缺口/人效配比），详见 chinese-enterprise-document-writing skill。
 §
-提效方案（业务交付提质增效方案2026.9，王佩琪版）迭代约定：四大部分=背景/现状与问题/提升方案/落地计划，子主题名沿用原文不自创；不得含软件工厂运营数据；数字一律不新编（无数据处写“试点期校准”）。用户裁定：8处丢失表格先空着、IE暂不含。源在~/Downloads，成品+说明+重建脚本在98 hermes与jiayang仓库Jesse/PM-documents。补充稿：第3章3.1-3.6（v1.2 含帛飞特实测锚点：按传统配比1:1:3:1同范围297人天→实际168人天、降43.4%，区间43.4%~53.3%引用取下限）、1.2基线+4.2指标补列、服务编排协作模式（八达光电实践）落地。八达光电=协作模式可落地提效（非加班安排）：需求调研工具原型>90%可用+自动映射数据库实体→研发SWE生成服务编排JavaBean→配置仅30%时间页面微调/按钮逻辑/验证；服务编排是工厂最大工作量（3.3(3)单点8.5个百分点最大）。
+提效方案（2026.9 王佩琪版）：四大部分=背景/现状与问题/提升方案/落地计划，子主题名沿用原文；不含软件工厂运营数据；数字不新编（无数据写“试点期校准”）；8处丢失表格先空着、IE暂不含。成品+重建脚本在 98 hermes 与 jiayang 仓库 Jesse/PM-documents；帛飞特锚点与八达光电协作模式见该文档。
 §
-OA报销全量导出（含招待旧）：149笔/155492.34元/2024-03~2026-09；四来源=出差84+个人6+招待旧19+招待新40（招待旧/新接续，旧2024-06~2025-07）。踩坑：antd Tabs未激活面板仍在DOM，全局抓行会虚高（109→228），须限定.ant-tabs-tabpane内抓取与翻页。流程+列索引见 skill smardaten-oa/references/oa-expense-full-export.md。
+OA报销全量导出（含招待旧）：149笔/155492.34元/2024-03~2026-09；四来源=出差84+个人6+招待旧19+招待新40。踩坑：antd未激活Tab面板仍在DOM致虚高（109→228），须限定.ant-tabs-tabpane内抓取。详见 skill smardaten-oa/references/oa-expense-full-export.md。
 §
 网络通道：Mac跑Clash系统代理127.0.0.1:7897，github.com只有走代理才通（裸curl/git直连超时属预期非被墙）；探通道先scutil --proxy，复测curl -x 127.0.0.1:7897。详见 skill github-china-access。
 §
 iPhone 端 Obsidian 同步=obsidian-git 插件（非 GitSync App）；iOS 不支持 SSH→只能 HTTPS+PAT，克隆前先填用户名+Token；手机端同步入口=屏幕顶部下拉（无 ribbon，插件图标在导航栏☰）。步骤见 skill obsidian-git-sync。
 §
-Windows端Obsidian+git（2026-09-22建成）：Obsidian=C:\software\obsidian\Obsidian.exe（vault配置在~/AppData/Roaming/obsidian/obsidian.json）；vault=克隆C:\Users\jesse\Documents\JesseDocuments\jiayang\obsidian-vault（origin git@github.com:jesse0830/obsidian.git，分支master）；已设repo级core.autocrlf=false保LF、身份JesseYoung/jesse0830@users.noreply.github.com；jiayang仓库.gitignore已排除obsidian-vault/。Windows的git=Hermes自带~/AppData/Local/hermes/git（cmd/已在用户PATH，GUI程序可用），SSH key就绪，obsidian-git插件启动即fetch（已实测）。
+Windows Obsidian+git：Obsidian=C:\software\obsidian\Obsidian.exe；vault=克隆 ...\jiayang\obsidian-vault（origin jesse0830/obsidian，master）；repo 级 core.autocrlf=false、身份 JesseYoung；Windows git=Hermes 自带 ~/AppData/Local/hermes/git（PATH 可用、SSH key 就绪）；obsidian-git 启动即 fetch。
 §
 文档版本约定（用户 2026-09-29 定）：每生成/修改一份文档都要标版本号，v1.0 起递加 v1.1/v1.2，标在文件名末尾与文档头，修订不改名换号。
+§
+三生态接线（2026-10-05）：内容=obsidian 仓库（vault 兼作 LLM Wiki.app 工作区，app 须开着）；hermes 经 MCP stdio 调其 12 工具（config: mcp_servers.llm-wiki）；jiayang 仓库=交付+hermes 生态（hermes-memory/、hermes-skills/，均软链）。详 wiki/concepts/wiki-obsidian-hermes-生态.md v1.3。
+§
+MBA备考：练习类进 MBA/练习/，一份卷子=一个文件（题面+末页解析，永不拆试卷版/解析版；合卷01=A卷30题+B卷24题）；入口 练习总览_v1.3、hub MBA备考总入口_v2.1；数学日更30题 + 英语日更30题（真题优先、避开近五年）规则见 skill study-material-production
+§
+读写笔记=讯飞Doxent：纪要自动入 vault/读写笔记（Hermes定时30m，App未运行跳过；导出器v1.5+门卫doxent_sync.py，见skill closed-app-data-extraction）。

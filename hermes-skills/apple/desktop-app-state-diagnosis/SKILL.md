@@ -72,6 +72,34 @@ window-geometry queries need Accessibility permission granted to the terminal pr
 files check out, hand the final one-glance confirmation to the user explicitly — "if it still looks
 empty, `Cmd+Q` and reopen" — rather than claiming a visual verification you did not perform.
 
+## Second mechanism: client/server app — pane stale while the backend is healthy
+
+A different mechanism with the same symptom: the desktop app is a **front-end bound to a local backend**
+rather than a viewer of on-disk files. The pane renders the transcript of a **per-run runtime id**; when the
+client's socket to the backend drops (app backgrounded / throttled — the close is client-side, `code=1005`),
+the backend reaps that run and tells the client so. The client self-heals by resuming, which mints a new
+runtime id — that the next drop orphan-reaps in turn. Healing is **capped per app run**, and once the budget
+is spent the pane stays bound to the dead runtime for the rest of the process's life, repainting its cached
+transcript (i.e. the messages from before the first drop).
+
+Prompts still work, so **nothing is lost**: the composer submits over the HTTP side, the turn runs and
+finishes server-side. Confirm the backend is healthy before touching anything:
+
+- the app-side log shows the prompt accepted and the turn finishing (`status=complete`);
+- the full transcript is readable in the backend's session store;
+- a multi-day app uptime means the dead-runtime records and the heal latch have never been cleared.
+
+**Fix, cheapest first — and never restart the app unasked:**
+1. Switch to another session and back (or close and reopen the pane) → fresh resume + transcript refresh.
+2. Quit and reopen the app → clears the warm cache, the dead-runtime records and the heal counter; on boot
+   it resumes the stored session and re-pulls the transcript. Nothing is lost.
+3. Prevention: start a fresh session (`/new`) when the current one has grown huge; update the app if old.
+
+Because the pane is the broken part, also give the user another way to read the answer (CLI session view,
+local dashboard URL), and ask any restart question in plain reply text.
+
+See `references/hermes-desktop-stale-pane.md` for the concrete Hermes-desktop logs, processes and commands.
+
 ## Housekeeping
 
 - Add the app's machine state to the parent repo's `.gitignore` (state dir, vector store / caches,
@@ -95,10 +123,17 @@ empty, `Cmd+Q` and reopen" — rather than claiming a visual verification you di
   compressed to a single line in this environment.
 - **Don't state that the GUI was checked** when you only verified files. Say what proved what, and ask the
   user for the visual confirmation.
+- **Don't read a stale pane as data loss.** Read the backend session store or the log's turn-finished line
+  before saying anything about content — the transcript lives server-side, and telling the user their work
+  is gone when it is not is the worst failure mode of this task.
+- **Don't ask a question only through the GUI when the GUI is the broken thing.** A confirmation dialog or
+  prompt popup can be as invisible as the frozen pane it belongs to; put the question in the reply text too.
 
 ## Reference
 
 - `references/llm-wiki-app-workspace.md` — the concrete LLM Wiki.app (macOS) case: state file names,
   workspace layout it expects, migration and verification commands.
+- `references/hermes-desktop-stale-pane.md` — the concrete client/server case: which log lines prove the
+  reap loop, which process owns the socket, where the heal latch lives, and the read-only evidence set.
 - Content conventions for the wiki itself (page thresholds, two-layer source pattern, frontmatter) live in
   the bundled `llm-wiki` skill; this skill is only about the app-side plumbing.

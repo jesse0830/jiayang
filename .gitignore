@@ -1,3 +1,6 @@
 obsidian-vault/
 
 # 旧 LLM Wiki.app 工作区已于 2026-10-05 归档到 ~/.hermes/cache/scratch/eco_backup/，内容统一进 obsidian-vault 仓库
+
+# hermes-skills 运行时锁文件（不入库）
+hermes-skills/.locks/
