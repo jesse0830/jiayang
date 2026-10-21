@@ -32,6 +32,10 @@ fields, and package health checks. It does not render documents itself
 - You need to read reviewers' comments, or add/delete comments.
 - A `.docx` won't open or behaves oddly and you need corruption triage.
 - The document needs a table of contents or "Page X of Y" footers.
+- Chapter/section numbering is inconsistent — chapters skip numbers, two sections share
+  one, a block still carries an old chapter number, heading depth disagrees with the shown
+  number, or body text has leftover hand-typed prefixes. Workflow and verification gates:
+  `references/heading-numbering-repair.md`.
 - Not for: `.doc` (legacy), `.odt`, or WYSIWYG layout work.
 
 ## Prerequisites
@@ -142,6 +146,11 @@ libreoffice`). If neither exists, tell the user PDF conversion is
 unavailable in this environment rather than improvising — python-docx
 cannot render PDFs, and layout fidelity requires a real renderer.
 
+For a page-1 sanity check without a renderer, macOS quicklook works:
+`qlmanage -t -s 1400 -o /tmp/thumb file.docx` writes a PNG thumbnail — enough to prove
+the package opens and the opening headings/numbering look right. It is not a layout
+review; do not describe it as one.
+
 ## Pitfalls
 
 - **Tokens split across runs.** Word often fragments text into several
@@ -169,9 +178,12 @@ cannot render PDFs, and layout fidelity requires a real renderer.
   document raises `KeyError`. Built-ins like `Heading 1`, `List Bullet`,
   `List Number`, `Table Grid` exist in the default template; custom
   styles must be declared in the create spec first.
-- **Numbered lists restart.** `List Number` relies on Word's default
-  numbering; separate lists in one document may continue numbering
-  instead of restarting. Warn users needing precise multi-list numbering.
+- **Numbered lists restart — and pseudo-restart.** `List Number` relies on Word's
+  default numbering, so separate lists may continue instead of restarting; the mirror
+  symptom is `1. 1. 1.` when each paragraph was given its own `numId`. Diagnose from
+  `numbering.xml` (`w:num` → `abstractNumId` → `w:lvl/w:start`, plus
+  `w:lvlOverride/w:startOverride`) before touching anything — see
+  `references/heading-numbering-repair.md` §4.
 - **Cell writes replace formatting.** `set-cell` uses `cell.text = ...`,
   which resets runs in that cell to plain formatting.
 - **Encoding.** All JSON specs/values files are read as UTF-8 explicitly;

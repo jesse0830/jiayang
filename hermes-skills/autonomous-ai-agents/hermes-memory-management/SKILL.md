@@ -46,6 +46,7 @@ hermes config set memory.user_char_limit 2500     # USER.md 上限（默认1375�
 - memory 工具 remove 的 old_text 必须是唯一子串；批量时新内容别撞其他条目的 old_text
 - ⚠️ **action 只有 `patch`，没有 `replace`**（2026-10-14 实测）：传 replace 整批写入被拒（返回「'replace' is not available; use 'patch'… Nothing was written」，记忆未损）。当前 `patch` 是**局部 span 替换**——old_text 只是被换掉的那一段，**其余内容保留**。所以「整条重写」＝old_text 抄整条原文；「砍一句」＝old_text 只给那句。工具返回里会带 `patched_entries`（改前）与 `patched_entries_after`（改后），逐条比一眼就能确认没被截断，不必再 read_file 也能核对，但仍建议回读文件确认字符数
 - ⚠️ **系统提示里的 MEMORY 内容可能落后于磁盘**：瘦身时以 `read_file ~/.hermes/memories/MEMORY.md` 的现文本为准，锚点/old_text 都从磁盘抄，别照抄系统提示里的旧版（实测同一条在两边长度不同）
+- gitignore 只拿去装机器产物：`hermes-skills/.gitignore` 已忽略 `.usage.json`、`.curator_state`、`.curator_ledger.jsonl`、`.bundled_manifest`、`.archive/`、`.curator_backups/`、`__pycache__/`。但**已追踪的文件光加 .gitignore 不生效**，必须先 `git rm --cached <file>` 再 commit。剩下的 `M SKILL.md` / `M scripts/*` / `?? 新技能目录` 都是**真内容，必须提交，别丢进 gitignore**（曾误以为 70 个未提交文件都是 curator 产物，实际只 4 个是）
 - ⚠️ **replace 是「整条替换」，不是局部替换**：old_text 只负责**定位整条**，content 必须是**完整的一条新记忆**。若当成局部替换（只给被改的那一小段），该条记忆的其余内容会被**静默丢弃**——2026-09-21 实测踩过：一条 300 字的长条目被截成一句 20 字的短句。
   - 正确姿势：改前先把原条全文读出来（read_file 记忆文件），改后**立刻回读核对**（或看工具返回的 current_entries），发现被截断立即用完整内容再 replace 一次
   - 想只动一句话时：把整条旧内容原样抄进 content，只改要改的那句

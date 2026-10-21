@@ -48,6 +48,15 @@ git rm -r --cached <vault子目录> && echo "<vault子目录>/" >> .gitignore
 - `~/Documents/Obsidian Vault` 是空壳目录，勿用
 - 仓库/通道细节见 `github-china-access` → `references/jiayang-obsidian-vault-sync.md`
 
+### 回答「XX 文件都推送到 git 了吗」的标准查法
+
+别只看 `git status` + `rev-list`，三步都要做，否则会漏报：
+1. `git fetch -q origin && git rev-list --left-right --count origin/master...HEAD` → `0\t0` 才算同步。**obsidian-git 的自动 push 会静默失败**（网络抖动），本地领先 1~2 个 commit 是常见态，直接 `git push origin master` 补推即可（本用户家宽 SSH 22/443 均通，不需要 Clash 代理）。
+2. `git ls-tree -r --name-only origin/master <目录>` 看**远程真值**，而不是本地磁盘。
+3. `git check-ignore -v <文件>` 区分「漏推」与「按设计排除」：本 vault 的 `.gitignore:25` 故意忽略 `JesseYoung/MBA/真题库/`（真题 PDF/Word 约 1240 MB，仅留本机，远程只有 `MBA历年真题库索引_v1.1.md`）。**这类文件不是遗漏，别建议用户推上去。**
+
+台账文件（如 `读写笔记/_工具/sync.log`）已被跟踪且每次同步都变，会产生噪音提交；补推后顺手 `git add && git commit && git push` 让它归零即可。
+
 ## 桌面端：agent 维护的知识库放哪（复用同步，别另建管道）
 
 要新建一个 agent 长期维护的 markdown 知识库（wiki / 第二大脑 / 领域笔记库），**放进 vault 里**，例如 `~/Documents/work/jiayang/obsidian-vault/LLM-wiki/`。理由：obsidian-git 的 5 分钟自动 commit+push、图谱视图、dataview、iPhone/Windows 多端全部白捡；放 vault 外就得再搭一套同步管道，还要额外处理与 Obsidian 的边界。

@@ -1,7 +1,7 @@
 ---
 name: study-material-production
-description: Use when 用户要备考/学习材料：逐日计划、词库、打卡面板、考点↔真题对应表；含每日数学/英语真题练习卷流水线（真题难度下限、选年避重、解析置文末、答案跨版本陷阱，见 references/daily-real-exam-paper-pipeline.md）；真题解析抽生词成表见 references/vocab-extraction-from-exam-solutions.md）。
-version: 1.5.0
+description: Use when 用户要备考/学习材料：逐日计划、词库、打卡面板、考点↔真题对应表；含每日数学/英语真题练习卷流水线（真题难度下限、选年避重、解析置文末、答案跨版本陷阱，见 references/daily-real-exam-paper-pipeline.md）；真题解析抽生词成表见 references/vocab-extraction-from-exam-solutions.md）；用户拍题求解（读图/像素量图/容斥复核/选项反查）见 references/geometry-problem-from-image.md。
+version: 1.6.0
 author: Hermes Agent
 license: MIT
 platforms: [macos]
@@ -29,7 +29,7 @@ metadata:
    - 主件：`~/Documents/work/jiayang/obsidian-vault/JesseYoung/MBA/`（**知识资料**：公式速查、考点精讲、词库、计划、打卡面板、hub）
    - **练习类产物一律进子目录 `JesseYoung/MBA/练习/`**（成套练习卷、专项题库、每日 30 题；目录入口 = `练习总览_v1.0.md`，改东西时同步它）。Obsidian 的 `[[ ]]` 按文件名解析，挪目录不会断链，但 `raw/sources/` 镜像与 `wiki/log.md` 要跟着走。
    - 副本：同仓库 `raw/sources/`（**新增的 hub 也要拷**；改写引用时跳过它，但镜像要全）
-   - 工作副本 + 生成器：`~/Documents/work/smardaten/smardatenCorp/99-软件工厂/98 hermes/`（生成器脚本一并拷进去，便于复现）
+   - 生成器脚本（**2026-10-16 起**）：`JesseYoung/MBA/_scripts/`（33 个 `mba_*.py`/`eng_*.py`/`verify_*.py` + `README_v1.0.md` 索引；运行 `PYTHONPATH= python3 <脚本>`，数据模块与构建器分离）。此前脚本只存在 `~/Documents/work/smardaten/smardatenCorp/99-软件工厂/98 hermes/`（**该目录不在任何 git 仓库**，仅存过程性工作副本）——新脚本一律落 vault 的 `_scripts/`，只写 98 hermes 会丢。
 5. **入库**：obsidian-vault 分支 master，`git add -A` → commit（中文提交信息写清「做了什么 + 版本号」）→ `git push origin master`；结束用 `git status -sb` 确认与 origin 同步，回执里报 SHA。obsidian-git 每 5 分钟自动 commit+push，因此 `git commit` 报 `nothing to commit, working tree clean` 且同时提示 `ahead of origin/master by 1 commit` = **插件已经替你提交了，这不是失败**：直接 `git push`，若回 `Everything up-to-date` 说明插件连 push 都做了——一律以 `git log --oneline -3` + `git status -sb`（无 ahead/behind）为准，不要重试或重写提交。
 6. **科目分开 = 分到打卡层**。用户说「把 X 跟 Y 分开」，意味着不只拆文件：X 要有**独立的打卡面板 + 独立的台账**，与 Y 各占各的进度，互不抵扣额度。
 
@@ -75,7 +75,7 @@ metadata:
 4. **真题与模拟搭配**：全卷约 6:4 标 🟦真题改编 / 🟨仿真（目标 18 + 12），每题标 `来源·考点·难度`。真题改编按公开真题的考点与数据改写，**文档头必须声明「非逐字原文，需逐字原题请对照官方真题册」**。
 5. **答案分布不许聚堆**：选项次序打乱，使 A—E 各 **6 题**；文档里加一句「选项次序已打乱，避免答案集中在某字母」向用户说明，否则用户会怀疑出题质量。
 6. **答案必须用换算法独立复核**：PS 题用 `Fraction`/暴力枚举/组合计数重算 → 再把算得的值**定位到选项文本**（`opts.index(text)`）核对答案字母指向的就是该值；DS 题用构造反例/网格穷举/枚举验证两个条件各自的充分性，推出字母再与卷面比对。另加结构自检（题号 1—30 连续、每题 5 个互异选项、DS 每条含两个条件、来源配比、A—E 各 6 题）。任一 FAIL 不许交付，回执写明「30/30 通过」。
-7. **产物文件**（`98 hermes/`，换日期改数据模块即可复用）：数据 `mba_q_ps_<YYYYMMDD>.py` + `mba_q_ds_<YYYYMMDD>.py`、建卷器 `mba_q_build.py`（读数据渲染，输出三份）、复核器 `mba_q_verify_<YYYYMMDD>.py`、入库器 `mba_q_ingest_<YYYYMMDD>.py`。**建卷器与复核器要一起重跑**：改完选项次序后必须重跑复核，否则字母校验会用到旧分布。
+7. **产物文件**（生成器归 `JesseYoung/MBA/_scripts/`，数据模块可先落 `98 hermes/` 再随脚本归档；换日期改数据模块即可复用）：数据 `mba_q_ps_<YYYYMMDD>.py` + `mba_q_ds_<YYYYMMDD>.py`、建卷器 `mba_q_build.py`（读数据渲染，输出三份）、复核器 `mba_q_verify_<YYYYMMDD>.py`、入库器 `mba_q_ingest_<YYYYMMDD>.py`。**建卷器与复核器要一起重跑**：改完选项次序后必须重跑复核，否则字母校验会用到旧分布。
 8. **入库**：三处落位（98 hermes / `JesseYoung/MBA/练习/` / `raw/sources/`）+ 追加 `wiki/log.md`。**日更文件不进 hub 资料地图逐条列**：hub 里只留一条「每日 30 题（日更）」分组 + 日更规则（首套挂链接、写清命名规则）；只有 hub 自身要改版时才递加版本号，避免每天 bump 一次 hub。建卷器 `mba_q_build.py` 的输出路径常量必须写死 `JesseYoung/MBA/练习/`，改目录后要重跑生成器并用 `md5` 对比已发布文件确认内容未变。
 9. **回执绝不剧透答案**：给路径 + 规模（行数/字节数）+ 复核结论 + 「今天第一步动作」（如「先限时 60 分钟做第 1—20 题」）。答案在文件末页，聊天里只说存放位置与做法。用户隔天说「再来 30 题」时，直接换日期生成，不要再确认规格。
 
@@ -106,6 +106,18 @@ metadata:
 3. **删源文件前必须做「内容行全覆盖核对」**：`git show <上一条 commit>:"<旧文件路径>"` 取回旧版，逐行归一化（剥 `#`、剥 `**`、全角空格→半角、`\s+` 压平）后在合卷全文里查存在性；允许不匹配的**只有封面 / 使用说明 / 分节标题**，任何题干、选项、答案、解析行不匹配就回查建卷器。这是证明「融合没丢内容」的唯一证据 —— 别只看合卷行数。
 4. **入库走全套**：合卷进 `JesseYoung/MBA/练习/` + `raw/sources/` 镜像；删掉旧 3 份文件及其镜像；入口页 `练习总览` 递加版本并写「3 合 1 变更」段；hub 递加版本（资料地图 3 行并 1 行、资料总数递减、变更行 + 版本表 + 待办勾选）；顺手修只被相关文件引用的旁支页（如公式速查的配套链接）并递加其版本。
 5. **`[[ ]]` 不许悬空**：全库扫旧 basename（`grep -rn --include=*.md`，排除 `raw/sources/`），命中即改；hub 自己的**历史变更行**保留旧链接属正常（库里既有惯例），但正文 / 资料地图 / 索引 / wiki 页一个旧引用都不许留。
+
+## 拍题答疑（用户发题目照片要「解法」）
+
+用户会直接甩一张题图 + 「帮我看下这道题的解法」。他要的是**能跟着走的解法**，不是一个答案字母。固定五步（技术细节与可复用代码见 `references/geometry-problem-from-image.md`）：
+
+1. **先找题源，再解题**。在 `JesseYoung/MBA/真题素材/` 里按题干关键词 grep（如 `正方形重叠|三个边长为1`），拿到完整题干与五个选项再动笔 —— 题图常被裁掉条件或选项，只靠 OCR 会丢东西。命中后回执里注明「<年份> 管综第 N 题」，用户能自己回查。找不到题源再纯靠图。
+2. **图就是数据，用像素量，不要「看着像」**。PIL 取原尺寸 → 定位图形区（先打印 ASCII 缩略图定列范围）→ 裁剪并 2× 放大 → `cv2.HoughLinesP` 提线段 → 两两求交得顶点。得到像素顶点后**归一化到已知边长**，再用几何约束（对称、正三角形、边长相等）反推角度；直接读像素角度会被抗锯齿带偏。
+3. **虚线 = 被遮挡的边**，不是独立图形。先还原「哪几条边被谁盖住」，图里才只剩真正的几个图元，重合关系才数得清。这类图读错一步全盘错。
+4. **面积类一律容斥**：`S = ΣSi − ΣSi∩j + ΣSi∩j∩k − …`，每块交集单独算并与数值互校（三者公共部分最常见是一个正三角形或半平面切割）。算完**把五个选项表达式逐个求值**比对（不是比对表达式形态），确认只落在唯一选项上。
+5. **错误选项是最好的讲义**。本题型每个错项都对应一种典型错误（漏加回公共部分、把斜放当成 45°）。答复必须把「选 X 等于犯了什么错」点出来。
+
+答复结构（照抄这个骨架，别写成长篇讲义）：答案 → 读图关键推论 → 分步计算（每步式子 + 数值）→ 选项比对 → 易错点对应到具体错项 → 可迁移结论（公式/比例）。数值给两位小数便于用户自查。要配图就写 SVG/HTML 落 scratch，用 `::preview{file="..."}` 单独一行内嵌，不要生成位图。
 
 ## 生成与验证流程
 

@@ -145,6 +145,13 @@ multi-tab support, and clickable file links.
 terminal(command="codex app /path/to/project", pty=true)
 ```
 
+## Non-OpenAI backends (China / DeepSeek)
+
+When OpenAI is unreachable, keep Codex and swap the provider — see
+`references/deepseek-provider.md` for the exact `config.toml` (Codex ≥ 0.145 requires
+`wire_api = "responses"`; DeepSeek serves `/v1/responses`) and the env-var persistence
+that GUI launches need. Verify with a real file-editing run, not `--version`.
+
 ## Rules
 
 1. **Always use `pty=true`** — Codex is an interactive terminal app and hangs without a PTY

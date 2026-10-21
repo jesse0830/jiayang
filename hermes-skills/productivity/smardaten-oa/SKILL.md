@@ -16,7 +16,9 @@ description: "Use when 用户在 SmarDaten OA 查报销/待报销金额、做报
 ## 访问方式（浏览器驱动，不是简单 HTTP）
 - OA 是 JS 渲染应用壳：web_extract / read 拿不到内容；登录后 innerText / AX 树为空是常态，不代表失败。必须用真实浏览器驱动（browser_exec 等）。
 - 首次需 macOS 调试授权：`browser-harness mac-approve`（该 CLI 不在 PATH，在 uv 缓存 `~/.cache/uv/archive-v0/*/bin/browser-harness`，`ls -t` 取最新）。
-- 登录：goto 登录页 → `#username` / `#password` 是 React 受控输入，fill_input 提交后可能仍空 → 用**原生 value setter + 派发 input 事件**再点登录按钮（buttons 里 className 含 login 兜底匹配）。
+- 登录**入口：门户根地址 `https://oa.smardaten.com/`**（自动跳转 `/application/login/1640627701456342`，title「登录页」，就是用户名+密码表单）。**不要**从应用页/appid 登录页（如 `47d3ea2e-…`）进：那条路只暴露**手机短信验证码**，用户已明确拒绝（"不要用手机号验证码登录，要用用户名密码登录"）。
+- 登录步骤：`#username` 填账号（真实值见记忆「OA 登录账号」）→ 密码用 **vault handle `vault_aa335b041494`** 走 `browser_vault_fill` 注入（账号先填，再 fill）→ 提交按钮 className 含 `login-form-button`，兜底找 innerText 含「登录」的 button 点击 → 直达 OA 门户工作台即成功，**不会**再弹短信码。
+- `#username` / `#password` 是 React 受控输入，fill_input 提交后可能仍空 → 用**原生 value setter + 派发 input 事件**；vault 注入前给两个框打 `autocomplete="username"` / `"current-password"`（误标 new-password 会导致 vault 拒绝识别）。
 - **整页跳转会丢会话**：每次 goto_url 后查 location.href 是否含 "login"，是则重登（有凭据，快）。
 - 应用壳空白/门户菜单不渲染：别逐级点菜单，直接 goto 应用直达 URL（appid + menuId，见 references/oa-expense-query.md）。
 
@@ -34,11 +36,15 @@ description: "Use when 用户在 SmarDaten OA 查报销/待报销金额、做报
 - 出差申请 ≠ 报销单（"出差申请"是申请单，勿混入）
 - 金额冲突以**正式模块**为准：实例 20260723516 招待模块 1252.00 vs "我发起的"列表 1252.20 → 取 1252.00（**2026-10-08 已开详情页核实：费用合计=报销金额=1252.00，冲突定案**）
 - 抓行先打印一行全列核对列索引（如 tds[12] 才是费用合计），再批量抓，勿盲信固定位置
+- **同一批"处理中"必须按业务状态分层**：`出纳付款` = 等财务打款，`直接主管/经办会计/总裁审批` = 等领导批。两类卡点的催促对象和动作完全不同，只给一个总额无法行动；分层后每层给笔数+小计。
+- **明细表必须带"停留天数"**（今日提交 = 0 天）：停留天数是用户最常追问的一列（例：出差单 501.91 停留在出纳付款 346 天 → 基本可判卡死，建议按补付处理）。停留天数取该单在**当前业务状态**的停留时长，不是单据年龄。
+- 翻页循环写安全阀：只有 `.ant-pagination-next` 的 `disabled` 为真或类名含 `ant-pagination-disabled` 才停，每页 sleep 1.5s，再按**唯一编码去重** —— 同一行重复渲染会虚增行数（招待模块曾 49 行含重复编码）。
 
 ## 交付规则（用户强制，三步缺一不可）
 1. 结果落盘 md：`~/Documents/work/smardaten/smardatenCorp/99-软件工厂/98 hermes/OA待报销金额汇总_YYYY-MM-DD_vX.Y.md`（版本号按用户文档约定标在文件名末尾）
 2. 更新记忆摘要条目（最新合计/笔数/分类小计），供下轮做对比基准
 3. 回复给总额 + 分类表 + 与上次对比 + 大额/异常单提醒（如跨年老单）
+4. 对比时**拆成三个问题回答**："新增了什么单"（看条数/金额增量）+"老单有没有动"（看处理中金额分布是否变化）+"谁卡在哪"（按业务状态分层）。只说"较上期 +N 笔"会把"自己新提交"误读成"财务在推进"。
 
 ## 对比基准
 读取上次结果 = 读 98 hermes/ 下最新的 `OA待报销金额汇总_*.md`（不要只信记忆），对照口径与数字。财务常在某日批量结束老单 → 对比时点明"已付清 N 笔"。
