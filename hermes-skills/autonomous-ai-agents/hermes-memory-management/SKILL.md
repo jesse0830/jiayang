@@ -34,15 +34,18 @@ hermes config set memory.user_char_limit 2500     # USER.md 上限（默认1375�
    - 🟡 精简：细节已存在文件/skill 里，记忆只留指针+关键摘要
    - 🟢 保留：长期有效（业务目标、用户偏好、技术配置、凭证）
 3. 删前验证：被删条目若引用文件/路径/skill，先 grep skills 确认细节在别处存在（例：周计划Excel路径在 chinese-enterprise-document-writing/references/zhoujihua-resource-analysis.md）
-4. 执行：用 memory 工具批量 operations（原子应用，最终字符上限统一检查）：
+4. 执行：用 memory 工具批量 operations（原子应用，最终字符上限统一检查），**只有 `remove` / `patch` / `add` 三种 action**：
    - remove：old_text = 唯一子串识别整条
-   - replace：old_text + content 整条替换
+   - patch：old_text = 要替换的**一段文本**，content = 这段的新文本，**该条其余内容自动保留**（局部替换语义）。要整条重写就把整条原文放进 old_text；要砍尾巴就只给尾巴那段
+   - `replace` 在这个运行时**不存在**，传 replace 会整批被拒并返回「use 'patch'」（2026-10-14 实测）
 5. 验证：read_file 记忆文件确认行数/字符数变化
    - **容量接近上限（≥95%）时，新增信息走「就地扩写已有条目」，不要新增条目**：先在文件里把最相关那条的**全文**读出来，整条 `replace`（在末尾追加新事实），长度控制在原条附近即可（例：上限 5000、总占用 4864 时，一条 434 字符的条目扩到 ~470 仍有余量）。改完回读 + grep 新增标志串（新写入的百分比/关键结论）确认真的落盘
 6. commit + push（先 git status 看工作树）
 
 ## 陷阱
 - memory 工具 remove 的 old_text 必须是唯一子串；批量时新内容别撞其他条目的 old_text
+- ⚠️ **action 只有 `patch`，没有 `replace`**（2026-10-14 实测）：传 replace 整批写入被拒（返回「'replace' is not available; use 'patch'… Nothing was written」，记忆未损）。当前 `patch` 是**局部 span 替换**——old_text 只是被换掉的那一段，**其余内容保留**。所以「整条重写」＝old_text 抄整条原文；「砍一句」＝old_text 只给那句。工具返回里会带 `patched_entries`（改前）与 `patched_entries_after`（改后），逐条比一眼就能确认没被截断，不必再 read_file 也能核对，但仍建议回读文件确认字符数
+- ⚠️ **系统提示里的 MEMORY 内容可能落后于磁盘**：瘦身时以 `read_file ~/.hermes/memories/MEMORY.md` 的现文本为准，锚点/old_text 都从磁盘抄，别照抄系统提示里的旧版（实测同一条在两边长度不同）
 - ⚠️ **replace 是「整条替换」，不是局部替换**：old_text 只负责**定位整条**，content 必须是**完整的一条新记忆**。若当成局部替换（只给被改的那一小段），该条记忆的其余内容会被**静默丢弃**——2026-09-21 实测踩过：一条 300 字的长条目被截成一句 20 字的短句。
   - 正确姿势：改前先把原条全文读出来（read_file 记忆文件），改后**立刻回读核对**（或看工具返回的 current_entries），发现被截断立即用完整内容再 replace 一次
   - 想只动一句话时：把整条旧内容原样抄进 content，只改要改的那句
