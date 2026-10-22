@@ -6,7 +6,7 @@ weixin限流ret=-2=服务端限流；gateway重启必须用venv/bin/python。
 §
 OA自发起流程：首页工作台→流程→我发起的，勿去事件流工作台。
 §
-OA报销：流程见 skill smardaten-oa。查完写结果文件（98 hermes/OA待报销金额汇总_*.md 带版本号）+更新 skill 快照。最新 2026-10-14 = 49729.64/27 笔；出纳积压 39796.84/21 笔；出差 501.91 滞留 346 天。登录走门户根 https://oa.smardaten.com/ 用户名+密码（勿用短信码）。
+OA报销：流程见 skill smardaten-oa。查完写结果文件（98 hermes/OA待报销金额汇总_*.md 带版本号）+更新 skill 快照。最新 2026-10-22 = 49729.64/27 笔，全部「出纳付款」（8 天零付款，10-14 那 6 笔已批完）；出差 501.91 停滞 331 天。登录走门户根 https://oa.smardaten.com/ 用户名+密码（勿用短信码）。
 §
 PPT：默认给markdown素材不生成.pptx，除非明说'生成pptx文件'。
 §

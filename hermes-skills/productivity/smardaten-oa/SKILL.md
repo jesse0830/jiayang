@@ -30,6 +30,8 @@ description: "Use when 用户在 SmarDaten OA 查报销/待报销金额、做报
 
 抓取节奏：抽 `.ant-table-tbody` 行文本 → 每页 sleep 1.5s + 校验 active 页码 → 落盘 JSON（workspace 目录）→ execute_code 本地按流程状态过滤统计。
 
+**先改每页条数，别一页页翻**：分页右下的 `.ant-pagination-options-size-changer` 可直接切 20/50/100 条/页，242 条选 100 条/页只剩 3 页。要点：分页常在视口外，点之前先 `document.querySelector('.ant-pagination').scrollIntoView({block:'center'})`，再 `click_at_xy` 点尺寸选择器 → sleep 1.5s → 在 `.ant-select-dropdown` 里点「100 条/页」→ sleep 4s 让表格重载。不 scrollIntoView 直接点坐标会打空（曾误点到右上角用户头像下拉）。
+
 ## 统计口径（用户认可，沿用 08-24 起各期文件）
 - 流程状态 = **处理中 → 待报销**（计入）
 - **结束 / 异常结束 / 已撤销** → 已付款或终止（不计）
